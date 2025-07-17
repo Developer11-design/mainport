@@ -6,7 +6,7 @@ Welcome to my personal portfolio website — a modern, responsive, and interacti
 
 ---
 
-## 🚀 Tech Stack
+# 🚀 Tech Stack
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -16,7 +16,7 @@ Welcome to my personal portfolio website — a modern, responsive, and interacti
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 
-## 📂 Features
+# 📂 Features
 
 - ✨ **Hero Section** with animated typing effect & floating tech icons  
 - 🗃️ **Projects Showcase** with modal previews and source links  
@@ -26,7 +26,7 @@ Welcome to my personal portfolio website — a modern, responsive, and interacti
 - 📬 **Contact Form** with social media links  
 - 🎯 Fully responsive and mobile-friendly design  
 
- ## Use:
+ # Use:
  
 | Technology        | Description                     |
 |-------------------|---------------------------------|
@@ -38,7 +38,7 @@ Welcome to my personal portfolio website — a modern, responsive, and interacti
 
 ---
 
-## 📂 Features
+# 📂 Features
 
 - ✨ **Hero Section** with animated typing effect & floating tech icons  
 - 🗃️ **Projects Showcase** with modal previews and source links  
