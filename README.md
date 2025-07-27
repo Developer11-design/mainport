@@ -1,4 +1,4 @@
-# 💼 Developer Portfolio Website
+# 💼 Soham's Portfolio Website
 
 Welcome to my personal portfolio website — a modern, responsive, and interactive platform built to showcase my skills, projects, achievements, and professional journey.
 
