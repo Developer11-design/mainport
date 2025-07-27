@@ -36,14 +36,3 @@ Welcome to my personal portfolio website — a modern, responsive, and interacti
 | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) | Deployment platform |
 
 
----
-
-# 📂 Features
-
-- ✨ **Hero Section** with animated typing effect & floating tech icons  
-- 🗃️ **Projects Showcase** with modal previews and source links  
-- 📑 **Skills** categorized using ShadCN Tabs  
-- 💼 **Internships & Work Experience** cards  
-- 📜 **Certifications and Achievements**  
-- 📬 **Contact Form** with social media links  
-- 🎯 Fully responsive and mobile-friendly design  
