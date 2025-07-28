@@ -1,10 +1,8 @@
 import { useState, useEffect, ReactElement } from 'react';
-import { Mail, Github, Linkedin, ExternalLink, ChevronDown, Award, Briefcase, Code2, Download } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, ChevronDown, Award, Briefcase, Code2, Download, BrainCircuit,Workflow } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { certifications } from '@/lib/certs';
-import { achievements } from '@/lib/achieve';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import {
   SiHtml5,
@@ -29,7 +27,10 @@ import {
   SiSqlite,
   SiAmazon,
   SiGooglecloud,
-  SiTypescript
+  SiTypescript,
+  SiPostman,
+  SiNeo4J,
+  SiOracle
 } from "react-icons/si";
 
 const Index = () => {
@@ -40,6 +41,9 @@ const Index = () => {
 
   // --- NEW: State for active project filter ---
   const [activeFilter, setActiveFilter] = useState<'All' | 'Web Development' | 'Machine Learning'>('All');
+
+  // --- NEW: State for active certification filter ---
+  const [activeCertFilter, setActiveCertFilter] = useState<'All' | 'Courses' | 'Tests'>('All');
 
   useEffect(() => {
     if (isTyping && currentIndex < fullText.length) {
@@ -63,32 +67,35 @@ const Index = () => {
   // Skill data organized by category
   const skills = {
     "Web Development": [
-      { name: "HTML5", icon: <SiHtml5 className="text-orange-500" /> },
-      { name: "CSS3", icon: <SiCss3 className="text-blue-500" /> },
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-      { name: "React", icon: <SiReact className="text-cyan-400" /> },
-      { name: "Node.js", icon: <SiNodedotjs className="text-green-600" /> },
-      { name: "Vue.js", icon: <SiVuedotjs className="text-green-300" /> },
-      { name: "TypeScript",icon: <SiTypescript className="text-blue-600" />},
-      { name: "Bootstrap", icon: <SiBootstrap className="text-purple-500" /> },
-      { name: "TailwindCSS", icon: <SiTailwindcss className="text-sky-400" />}
+      { name: "HTML5", icon: <SiHtml5 className="text-orange-500 mx-auto" /> },
+      { name: "CSS3", icon: <SiCss3 className="text-blue-500 mx-auto" /> },
+      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400 mx-auto" /> },
+      { name: "React", icon: <SiReact className="text-cyan-400 mx-auto" /> },
+      { name: "Node.js", icon: <SiNodedotjs className="text-green-600 mx-auto" /> },
+      { name: "Vue.js", icon: <SiVuedotjs className="text-green-300 mx-auto" /> },
+      { name: "TypeScript",icon: <SiTypescript className="text-blue-600 mx-auto" />},
+      { name: "Bootstrap", icon: <SiBootstrap className="text-purple-500 mx-auto" /> },
+      { name: "TailwindCSS", icon: <SiTailwindcss className="text-sky-400 mx-auto" />}
     ],
     "Machine Learning & Data Science": [
-      { name: "Python", icon: <SiPython className="text-yellow-300" /> },
-      { name: "NumPy", icon: <SiNumpy className="text-blue-400" /> },
-      { name: "Pandas", icon: <SiPandas className="text-purple-300" /> },
-      { name: "Scikit-learn", icon: <SiScikitlearn className="text-orange-300" /> },
-      { name: "TensorFlow", icon: <SiTensorflow className="text-orange-500" /> },
-      { name: "Keras", icon: <SiKeras className="text-red-500" /> },
-      { name: "PyTorch", icon: <SiPytorch className="text-red-600" /> },
-      { name: "FastAPI", icon: <SiFastapi className="text-green-400" />},
-    
+      { name: "Python", icon: <SiPython className="text-yellow-300 mx-auto" /> },
+      { name: "NumPy", icon: <SiNumpy className="text-blue-400 mx-auto" /> },
+      { name: "Pandas", icon: <SiPandas className="text-purple-300 mx-auto" /> },
+      { name: "Scikit-learn", icon: <SiScikitlearn className="text-orange-300 mx-auto" /> },
+      { name: "TensorFlow", icon: <SiTensorflow className="text-orange-500 mx-auto" /> },
+      { name: "Keras", icon: <SiKeras className="text-red-500 mx-auto" /> },
+      { name: "PyTorch", icon: <SiPytorch className="text-red-600 mx-auto" /> },
+      { name: "FastAPI", icon: <SiFastapi className="text-green-400 mx-auto" /> },
+
     ],
     "Database Management": [
-      { name: "MySQL", icon: <SiMysql className="text-blue-500" /> },
-      { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400" /> },
-      { name: "SQLite", icon: <SiSqlite className="text-indigo-400" />},
-      { name: "MongoDB", icon: <SiMongodb className="text-green-400" /> }
+      { name: "MySQL", icon: <SiMysql className="text-blue-700 mx-auto" /> },
+      { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400 mx-auto" /> },
+      { name: "SQLite", icon: <SiSqlite className="text-indigo-400 mx-auto" />},
+      { name: "MongoDB", icon: <SiMongodb className="text-green-400 mx-auto" /> },
+      {name: "Postman", icon: <SiPostman className="text-orange-500 mx-auto" />},
+      { name : "Neo4j", icon: <SiNeo4J className="text-blue-500 mx-auto" /> },
+      { name : "Oracle", icon: <SiOracle className="text-red-500 mx-auto" /> }
     ],
     "Cloud Services": [
   { 
@@ -101,7 +108,7 @@ const Index = () => {
       <img 
         src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" 
         alt="Azure" 
-        className="w-10 h-8 mx-auto object-contain" 
+        className="w-23 h-18 mx-auto object-contain" 
       />
     ) 
   },
@@ -119,16 +126,17 @@ const Index = () => {
       />
     ) 
   },
-  { 
-    name: "Streamlit", 
-    icon: (
-      <img 
-        src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.svg" 
-        alt="Streamlit" 
-        className="w-16 h-10 mx-auto object-contain" 
-      />
-    ) 
-  }
+  {
+  name: "Streamlit",
+  icon: (
+    <img
+      src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.svg"
+      alt="Streamlit"
+      className="w-34 h-14 mx-auto object-contain"
+    />
+  )
+}
+
 ]
 
   };
@@ -257,7 +265,7 @@ const Index = () => {
     {
       title: "Band Gap Prediction Model",
       description: "Machine Learning model using advanced ML algorithms for material science",
-      tech: ["Python", "Flask", "Scikit-learn", "Machine Learning", "Regression", "Classification"],
+      tech: ["Python", "Scikit-learn", "Machine Learning", "Regression", "Classification","TensorFlow"],
       category: "Machine Learning", // Add category for filtering
       details: "Created a sophisticated band gap prediction model for semiconductor materials using quantum mechanical properties. The project includes a user-friendly web interface and demonstrates expertise in both frontend development and materials science.",
       github: "https://github.com/SohamWalam11/Excavate-25",
@@ -313,6 +321,102 @@ const Index = () => {
     return project.category === activeFilter;
   });
 
+  // --- NEW: Certification data organized by category ---
+  const certifications = [
+    {
+      name: "ArcGIS Python | Spatial Data Science",
+      category: "Courses",
+      imagePath: "/certs/ArcGIS.png",
+      badgeClass: "px-4 py-2 bg-black text-fuchsia-400 border-fuchsia-600 hover:bg-fuchsia-800/20 hover:text-white transition-all cursor-pointer"
+    },
+    {
+      name: "Machine Learning Bootcamp (S4DS)",
+      category: "Courses",
+      imagePath: "/certs/Soham Kishor Walam.png",
+      badgeClass: "px-4 py-2 bg-slate-950 text-sky-400 border-cyan-500 hover:bg-sky-900/40 hover:shadow-sky-500/30 shadow-md transition-all cursor-pointer"
+    },
+    {
+      name: "Data Science & Analytics (HP)",
+      category: "Courses",
+      imagePath: "/certs/HP_Data.jpg",
+      badgeClass: "px-4 py-2 bg-black text-green-400 border-green-600 shadow-inner hover:bg-green-900/30 hover:shadow-green-500/20 transition-all cursor-pointer"
+    },
+    {
+      name: "AWS Cloud Services",
+      category: "Courses",
+      imagePath: "/certs/AWS_cloud.png",
+      badgeClass: "px-4 py-2 bg-yellow-600/20 text-yellow-300 border-yellow-500 cursor-pointer hover:bg-yellow-700/30 transition-colors"
+    },
+    {
+      name: "PyTorch (OpenCV)",
+      category: "Courses",
+      imagePath: "/certs/PyTorch.png",
+      badgeClass: "px-4 py-2 bg-gradient-to-r from-indigo-800 to-violet-600 text-white border-0 hover:brightness-110 transition-all cursor-pointer"
+    },
+    {
+      name: "SQL Intermediate Test",
+      category: "Tests",
+      imagePath: "/certs/SQL.png",
+      badgeClass: "px-4 py-2 bg-zinc-900 text-green-400 border-green-500 font-mono hover:bg-zinc-800 transition-colors cursor-pointer"
+    },
+    {
+      name: "Python Basic Test",
+      category: "Tests",
+      imagePath: "/certs/Test.png",
+      badgeClass: "px-4 py-2 bg-slate-900 text-sky-400 border-sky-500 hover:bg-slate-800 transition-colors cursor-pointer"
+    },
+    {
+      name: "AWS Cloud Foundations",
+      category: "Courses",
+      imagePath: "/certs/AWS.png",
+      badgeClass: "px-4 py-2 bg-purple-900/40 text-indigo-200 border-indigo-500 hover:bg-purple-700/50 transition-all cursor-pointer"
+    },
+    {
+      name: "Tensorflow & Keras (OpenCV)",
+      category: "Courses",
+      imagePath: "/certs/TensorFlow & Keras.png",
+      badgeClass: "px-4 py-2 bg-emerald-600/20 text-emerald-300 border border-emerald-500 rounded-full text-sm cursor-pointer hover:bg-emerald-700/30 transition-colors"
+    },
+    {
+      name: "Develop ML Solutions (AWS)",
+      category: "Courses",
+      imagePath: "/certs/Develop ML Solutions.png",
+      badgeClass: "px-4 py-2 bg-gradient-to-r from-red-700 via-green-600 to-blue-600 text-white border-0 hover:brightness-110 transition-all"
+    },
+    {
+      name: "Optimize ML Models (AWS)",
+      category: "Courses",
+      imagePath: "/certs/Optimize models.png",
+      badgeClass: "px-4 py-2 bg-cyan-950 text-emerald-300 border-emerald-500 hover:bg-emerald-900/30 transition-all cursor-pointer"
+    },
+    {
+      name: "Build with AI (Saylor)",
+      category: "Tests",
+      imagePath: "/certs/Build with AI.png",
+      badgeClass: "px-4 py-2 bg-gradient-to-r from-fuchsia-700 via-purple-600 to-cyan-500 text-white border-0 hover:brightness-110 transition-all cursor-pointer"
+    },
+    {
+      name: "GenAI with Diffusion Models (AWS)",
+      category: "Courses",
+      imagePath: "/certs/GenAI with Diffusion models.png",
+      badgeClass: "px-4 py-2 bg-black text-lime-400 border-lime-500 shadow-lg shadow-lime-500/20 hover:bg-lime-800/40 transition-all cursor-pointer"
+    },
+    {
+      name: "Data Engineeering (AWS)",
+      category: "Courses",
+      imagePath: "/certs/Data Engg.png",
+      badgeClass: "px-4 py-2 bg-[#7b5d5d] text-[#f0e0dc] border-[#b89a95] shadow-md shadow-[#b89a95]/20 hover:bg-[#8d6c6c] transition-all cursor-pointer"
+    }
+  ];
+
+  // --- NEW: Filtered certifications based on activeCertFilter ---
+  const filteredCertifications = certifications.filter(cert => {
+    if (activeCertFilter === 'All') {
+      return true;
+    }
+    return cert.category === activeCertFilter;
+  });
+
   const achievements = [
     {
       title: "IIT Kharagpur National Level Hackathon",
@@ -328,7 +432,7 @@ const Index = () => {
     },
     {
       title: "ByteVerse 7.0 National Level Hackathon",
-      subtitle: "Amongst top 7 teams out of 680 teams",
+      subtitle: "Amongst top 7 teams out of 172 teams",
       description: "Achieved top 7 teams position in the hackathon creating a chatbot for legal advisories using Gradio and Streamlit for deployment.",
       image : "/achieve/ByteVerse.jpg"
     },
@@ -464,273 +568,212 @@ const Index = () => {
           <h2 className="text-4xl font-bold text-center my-16 text-white">Internships</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Code2 className="text-blue-400" />
-                  Data Analyst Intern
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">
-                  Data Analyst Intern at Prasunet Foundation, where I developed a comprehensive dashboard,
-                  built a Flask app for clickstream and customer content analysis, visualized customer behavior
-                  to improve engagement, and deployed the solution using Streamlit.
-                </p>
-              </CardContent>
-            </Card>
+  <CardHeader>
+    <CardTitle className="text-white flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Workflow className="text-blue-400" />
+        <span>AI & ML Intern</span>
+      </div>
+      <span className="text-sm font-medium text-white-400">Jul'25 - Aug'25</span>
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-gray-300">
+      Artificial & Machine Learning Intern at InLighnX Global Pvt Ltd, where I developed a comprehensive dashboard,
+      built a Flask app for clickstream and customer content analysis, visualized customer behavior
+      to improve engagement, and deployed the solution using Streamlit.
+    </p>
+  </CardContent>
+</Card>
 
-            <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Briefcase className="text-blue-400" />
-                  Deloitte Internship
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">
-                  Data Analyst Intern at Deloitte, where I developed interactive Tableau dashboards
-                  and contributed to advanced data analysis and visualization projects.
-                </p>
-              </CardContent>
-            </Card>
+  <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
+  <CardHeader>
+    <CardTitle className="text-white flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Code2 className="text-blue-400" />
+        <span>Data Analyst Intern</span>
+      </div>
+      <span className="text-sm text-white-400">Feb'25 - Apr'25</span>
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-gray-300">
+      Data Analyst Intern at Prasunet Foundation, where I developed a comprehensive dashboard,
+      built a Flask app for clickstream and customer content analysis, visualized customer behavior
+      to improve engagement, and deployed the solution using Streamlit.
+    </p>
+  </CardContent>
+</Card>
 
-            <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Award className="text-green-400" />
-                  BCG X Internship
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">
-                  Data Science Intern at BCG X, developed comprehensive customer analysis models
-                  and provided actionable insights from complex datasets.
-                </p>
-              </CardContent>
-            </Card>
+
+  <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
+  <CardHeader>
+    <div className="flex items-center justify-between">
+      <CardTitle className="text-white flex items-center gap-2">
+        <Briefcase className="text-blue-400" />
+        Deloitte Virtual Internship
+      </CardTitle>
+
+      {/* Dialog Trigger for Deloitte Certificate */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <button className="text-emerald-400 hover:text-emerald-500 transition" title="View Certificate">
+            <Award className="w-5 h-5" />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-white">Deloitte Internship Certificate</DialogTitle>
+            <DialogDescription className="text-gray-300 mt-2">
+              Click to view in full size.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 flex justify-center">
+            <a
+              href="/certs/Deloitte_Internship_Certificate.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/certs/Deloitte_Internship_Certificate.png"
+                alt="Deloitte Internship Certificate"
+                className="max-w-full h-auto rounded-lg shadow-lg"
+              />
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  </CardHeader>
+
+  <CardContent>
+    <p className="text-gray-300">
+      Data Analyst Intern at Deloitte, where I developed interactive Tableau dashboards and contributed to advanced data analysis and visualization projects.
+    </p>
+  </CardContent>
+</Card>
+ 
+ <Card className="bg-slate-800/70 border-slate-700 hover:border-purple-500 transition-all duration-300 hover:scale-105">
+  <CardHeader>
+    <div className="flex items-center justify-between">
+      <CardTitle className="text-white flex items-center gap-2">
+        <BrainCircuit className="text-green-400" />
+        BCG X Virtual Internship
+      </CardTitle>
+
+      {/* Dialog Trigger for BCG X Certificate */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <button className="text-green-400 hover:text-green-500 transition" title="View Certificate">
+            <Award className="w-5 h-5" />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-white">BCG X Internship Certificate</DialogTitle>
+            <DialogDescription className="text-gray-300 mt-2">
+              Click to view in full size.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 flex justify-center">
+            <a
+              href="/certs/BCGX_Internship_Certificate.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/certs/BCGX_Internship_Certificate.png"
+                alt="BCG X Internship Certificate"
+                className="max-w-full h-auto rounded-lg shadow-lg"
+              />
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  </CardHeader>
+
+  <CardContent>
+    <p className="text-gray-300">
+      Data Science Intern at BCG X, developed comprehensive customer analysis models and provided actionable insights from complex datasets.
+    </p>
+  </CardContent>
+</Card>
           </div>
 
           {/* Certifications Section */}
           <div className="mt-12 text-center">
-  <h3 className="text-2xl font-bold text-white mb-6">Certifications</h3>
-  <div className="flex flex-wrap justify-center gap-4">
+            <h3 className="text-2xl font-bold text-white mb-6">Certifications</h3>
+            
+            {/* --- NEW: Filter Buttons for Certifications --- */}
+            <div className="flex justify-center gap-4 mb-8">
+              <Button
+                variant={activeCertFilter === 'All' ? 'default' : 'outline'}
+                className={
+                  activeCertFilter === 'All'
+                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                    : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+                }
+                onClick={() => setActiveCertFilter('All')}
+              >
+                All
+              </Button>
 
-    {/* ArcGIS Python | Spatial Data Science */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-purple-600/20 text-purple-300 border-purple-500 cursor-pointer hover:bg-purple-700/30 transition-colors">
-          ArcGIS Python | Spatial Data Science
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">ArcGIS Python | Spatial Data Science</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-          <a href="/certs/ArcGIS.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/ArcGIS.png"
-              alt="ArcGIS Python | Spatial Data Science Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
+              <Button
+                variant={activeCertFilter === 'Courses' ? 'default' : 'outline'}
+                className={
+                  activeCertFilter === 'Courses'
+                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                    : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+                }
+                onClick={() => setActiveCertFilter('Courses')}
+              >
+                Courses
+              </Button>
 
-    {/* Machine Learning Bootcamp (S4DS) */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-blue-600/20 text-blue-300 border-blue-500 cursor-pointer hover:bg-blue-700/30 transition-colors">
-          Machine Learning Bootcamp (S4DS)
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">Machine Learning Bootcamp (S4DS)</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-            {/* You'll need to replace 'Composit_Excavate.png' with the actual filename for this cert */}
-          <a href="/certs/Composit_Excavate.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/Soham Kishor Walam.png"
-              alt="Machine Learning Bootcamp (S4DS) Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
+              <Button
+                variant={activeCertFilter === 'Tests' ? 'default' : 'outline'}
+                className={
+                  activeCertFilter === 'Tests'
+                    ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                    : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+                }
+                onClick={() => setActiveCertFilter('Tests')}
+              >
+                Tests
+              </Button>
+            </div>
 
-    {/* Data Science & Analytics (HP) */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-green-600/20 text-green-300 border-green-500 cursor-pointer hover:bg-green-700/30 transition-colors">
-          Data Science & Analytics (HP)
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">Data Science & Analytics (HP)</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-             {/* You'll need to replace 'HP_Data Science & ....png' with the actual filename for this cert */}
-          <a href="/certs/HP_Data.jpg" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/HP_Data.jpg"
-              alt="Data Science & Analytics (HP) Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-
-    {/* AWS Cloud Services */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-yellow-600/20 text-yellow-300 border-yellow-500 cursor-pointer hover:bg-yellow-700/30 transition-colors">
-          AWS Cloud Services
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">AWS Cloud Services</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-             {/* You'll need to replace 'AWS_cloud.png' with the actual filename for this cert */}
-          <a href="/certs/AWS_cloud.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/AWS_cloud.png"
-              alt="AWS Cloud Services Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-
-    {/* PyTorch (OpenCV) */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-pink-600/20 text-pink-300 border-pink-500 cursor-pointer hover:bg-pink-700/30 transition-colors">
-          PyTorch (OpenCV)
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">PyTorch (OpenCV)</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-             {/* You'll need to replace 'PyTorch.png' with the actual filename for this cert */}
-          <a href="/certs/PyTorch.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/PyTorch.png"
-              alt="PyTorch (OpenCV) Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-
-    {/* SQL*/}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-red-600/20 text-red-300 border-red-500 cursor-pointer hover:bg-red-700/30 transition-colors">
-          SQL Intermediate
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">SQL Intermediate</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-            {/* You'll need to replace 'TensorFlow & Keras....png' with the actual filename for this cert */}
-          <a href="/certs/SQL.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/SQL.png"
-              alt="SQL Intermediate Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-
-    {/* AWS Solution Architecture */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-emerald-600/20 text-emerald-300 border-emerald-500 cursor-pointer hover:bg-emerald-700/30 transition-colors">
-          AWS Cloud Foundations
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">AWS Cloud Foundations</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-            {/* You'll need to replace 'AWS.png' with the actual filename for this cert */}
-          <a href="/certs/AWS.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/AWS.png"
-              alt="AWS Solution Cloud Foundations"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-     
-     {/* Tensorflow & Keras opencv */}
-    <Dialog>
-      <DialogTrigger asChild>
-        <Badge variant="secondary" className="px-4 py-2 bg-purple-600/20 text-purple-300 border-purple-500 cursor-pointer hover:bg-purple-700/30 transition-colors">
-          Tensorflow & Keras OpenCV
-        </Badge>
-      </DialogTrigger>
-      <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-white">Tensorflow & Keras opencv</DialogTitle>
-          <DialogDescription className="text-gray-300 mt-2">
-            Click on the image to view full size.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="mt-4 flex justify-center">
-            {/* You'll need to replace 'TensorFlow & Keras....png' with the actual filename for this cert */}
-          <a href="/certs/TensorFlow & Keras.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/certs/TensorFlow & Keras.png"
-              alt="Tensorflow & Keras opencv Certificate"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-            />
-          </a>
-        </div>
-      </DialogContent>
-    </Dialog>
-  </div>
-</div>
+            {/* --- NEW: Filtered Certifications Display --- */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {filteredCertifications.map((cert, index) => (
+                <Dialog key={index}>
+                  <DialogTrigger asChild>
+                    <Badge variant="secondary" className={cert.badgeClass}>
+                      {cert.name}
+                    </Badge>
+                  </DialogTrigger>
+                  <DialogContent className="bg-slate-800 border-slate-700 max-w-lg">
+                    <DialogHeader>
+                      <DialogTitle className="text-white">{cert.name}</DialogTitle>
+                      <DialogDescription className="text-gray-300 mt-2">
+                        Click on the image to view full size.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="mt-4 flex justify-center">
+                      <a href={cert.imagePath} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={cert.imagePath}
+                          alt={`${cert.name} Certificate`}
+                          className="max-w-full h-auto rounded-lg shadow-lg"
+                        />
+                      </a>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -741,28 +784,43 @@ const Index = () => {
 
           {/* --- NEW: Filter Buttons for Projects --- */}
           <div className="flex justify-center gap-4 mb-8">
-            <Button
-              variant={activeFilter === 'All' ? 'default' : 'outline'}
-              className={activeFilter === 'All' ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'}
-              onClick={() => setActiveFilter('All')}
-            >
-              All
-            </Button>
-            <Button
-              variant={activeFilter === 'Web Development' ? 'default' : 'outline'}
-              className={activeFilter === 'Web Development' ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'}
-              onClick={() => setActiveFilter('Web Development')}
-            >
-              Web Development
-            </Button>
-            <Button
-              variant={activeFilter === 'Machine Learning' ? 'default' : 'outline'}
-              className={activeFilter === 'Machine Learning' ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'}
-              onClick={() => setActiveFilter('Machine Learning')}
-            >
-              Machine Learning
-            </Button>
-          </div>
+  <Button
+    variant={activeFilter === 'All' ? 'default' : 'outline'}
+    className={
+      activeFilter === 'All'
+        ? 'bg-purple-600 hover:bg-purple-700 text-black'
+        : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+    }
+    onClick={() => setActiveFilter('All')}
+  >
+    All
+  </Button>
+
+  <Button
+    variant={activeFilter === 'Web Development' ? 'default' : 'outline'}
+    className={
+      activeFilter === 'Web Development'
+        ? 'bg-purple-600 hover:bg-purple-700 text-white'
+        : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+    }
+    onClick={() => setActiveFilter('Web Development')}
+  >
+    Web Development
+  </Button>
+
+  <Button
+    variant={activeFilter === 'Machine Learning' ? 'default' : 'outline'}
+    className={
+      activeFilter === 'Machine Learning'
+        ? 'bg-purple-600 hover:bg-purple-700 text-white'
+        : 'border-purple-500 text-purple-300 hover:bg-purple-900/20'
+    }
+    onClick={() => setActiveFilter('Machine Learning')}
+  >
+    Machine Learning
+  </Button>
+</div>
+
           {/* --- END NEW: Filter Buttons --- */}
 
          
