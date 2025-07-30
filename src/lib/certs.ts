@@ -54,5 +54,9 @@ export const certifications = [
   {
      title: "Data Engineering (AWS)",
     image: "/certs/Data Engg.png",
+  },
+  {
+    title : "Data Science (SkillUp)",
+    image : "/certs/Data Science SkillUp.png",
   }
 ];
