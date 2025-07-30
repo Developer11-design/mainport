@@ -55,7 +55,7 @@ const Index = () => {
   const fullText = "Exploring the Future with ML, AI, and Robotics Building Smart, Data-Driven Systems";
 
   const [activeFilter, setActiveFilter] = useState<'All' | 'Web Development' | 'Machine Learning'>('All');
-  const [activeCertFilter, setActiveCertFilter] = useState<'All' | 'Courses' | 'Tests'>('All');
+  const [activeCertFilter, setActiveCertFilter] = useState<'All' | 'Courses' | 'Tests' | 'BootCamps'>('All');
   const [activeInternshipFilter, setActiveInternshipFilter] = useState<'All' | 'Live' | 'Virtual'>('All');
 
   useEffect(() => {
@@ -380,7 +380,7 @@ const Index = () => {
       { icon: <SiTypescript className="text-blue-500 text-3xl" /> },
       { icon: <SiVercel className="text-white text-3xl" /> },
       { icon: <SiVite className="text-purple-400 text-3xl" /> },
-      { icon: <SiFramer className="text-black-400 text-3xl" /> }, // Framer Motion
+      { icon: <SiFramer className="text-orange-400 text-3xl" /> }, // Framer Motion
     ],
     category: "Web Development",
     details:
@@ -484,7 +484,7 @@ const Index = () => {
     },
     {
       name: "Machine Learning Bootcamp (S4DS)",
-      category: "Courses",
+      category: "BootCamps",
       imagePath: "/certs/Soham Kishor Walam.png",
       badgeClass: "px-4 py-2 bg-slate-950 text-sky-400 border-cyan-500 hover:bg-sky-900/40 hover:shadow-sky-500/30 shadow-md transition-all cursor-pointer"
     },
@@ -502,21 +502,21 @@ const Index = () => {
     },
     {
       name: "PyTorch (OpenCV)",
-      category: "Courses",
+      category: "BootCamps",
       imagePath: "/certs/PyTorch.png",
-      badgeClass: "px-4 py-2 bg-gradient-to-r from-indigo-800 to-violet-600 text-white border-0 hover:brightness-110 transition-all cursor-pointer"
+      badgeClass: "px-4 py-2 bg-gradient-to-r from-indigo-700 via-purple-700 to-violet-600 text-white font-medium rounded-md shadow-md hover:scale-105 hover:brightness-110 transition-transform duration-200 ease-in-out cursor-pointer"
     },
     {
       name: "SQL Intermediate Test (HackerRank)",
       category: "Tests",
       imagePath: "/certs/SQL.png",
-      badgeClass: "px-4 py-2 bg-zinc-900 text-green-400 border-green-500 font-mono hover:bg-zinc-800 transition-colors cursor-pointer"
+      badgeClass: "px-5 py-2 bg-black text-cyan-400 border border-cyan-400 rounded-md hover:bg-cyan-400 hover:text-black shadow-[0_0_10px_#22d3ee80] transition-all duration-300 ease-in-out font-mono tracking-wider cursor-pointer"
     },
     {
       name: "Python Basic Test (HackerRank)",
       category: "Tests",
       imagePath: "/certs/Test.png",
-      badgeClass: "px-4 py-2 bg-slate-900 text-sky-400 border-sky-500 hover:bg-slate-800 transition-colors cursor-pointer"
+      badgeClass: "px-5 py-2 bg-[#0d1117] text-[#3b82f6] border border-[#3b82f6] rounded-md hover:bg-[#3b82f6] hover:text-black shadow-[0_0_12px_#3b82f680] transition duration-300 ease-in-out font-mono tracking-widest cursor-pointer"
     },
     {
       name: "AWS Cloud Foundations",
@@ -526,9 +526,9 @@ const Index = () => {
     },
     {
       name: "Tensorflow & Keras (OpenCV)",
-      category: "Courses",
+      category: "BootCamps",
       imagePath: "/certs/TensorFlow & Keras.png",
-      badgeClass: "px-4 py-2 bg-emerald-600/20 text-emerald-300 border border-emerald-500 rounded-full text-sm cursor-pointer hover:bg-emerald-700/30 transition-colors"
+      badgeClass: "px-4 py-2 bg-zinc-900 text-green-400 border-green-500 font-mono hover:bg-zinc-800 transition-colors cursor-pointer"
     },
     {
       name: "Develop ML Solutions (AWS)",
@@ -565,6 +565,24 @@ const Index = () => {
       category: "Courses",
       imagePath: "/certs/SkillUp.png",
       badgeClass: "px-4 py-2 bg-[#2e3a59] text-[#d8e0f0] border border-[#4b5b88] shadow-md shadow-[#4b5b88]/30 hover:bg-[#3b4a6d] transition-all duration-200 ease-in-out cursor-pointer"
+    },
+    {
+      name : "Python and AI (DevTown)",
+      category : "BootCamps",
+      imagePath : "/certs/Python and AI.png",
+      badgeClass : "px-4 py-2 bg-[#f0f4f8] text-[#1f2937] border border-[#d1d5db] shadow-sm shadow-[#9ca3af]/20 hover:bg-[#e5edf5] transition-all duration-200 ease-in-out cursor-pointer"
+    },
+    {
+      name : "GenAI (PreGrad)",
+      category : "BootCamps",
+      imagePath : "/certs/GenAI.png",
+      badgeClass : "px-4 py-2 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold rounded-lg shadow-lg shadow-indigo-300/40 hover:brightness-110 transition-all duration-300 ease-in-out cursor-pointer"
+    },
+    {
+      name : "Python Project (PreGrad)",
+      category : "BootCamps",
+      imagePath : "/certs/PyPro.png",
+      badgeClass : "px-4 py-2 bg-gradient-to-r from-teal-400 via-emerald-400 to-lime-400 text-black font-bold rounded-lg shadow-lg shadow-lime-300/30 hover:contrast-125 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
     }
   ];
 
@@ -897,6 +915,17 @@ const Index = () => {
             >
               Tests
             </Button>
+            <Button
+              variant={activeCertFilter === 'BootCamps' ? 'default' : 'outline'}
+              className={
+                activeCertFilter === 'BootCamps'
+                  ? 'bg-purple-600 hover:bg-purple-700 text-white'
+                  : ' border-purple-500 text-purple-400 hover:bg-purple-800/10'
+              }
+              onClick={() => setActiveCertFilter('BootCamps')}
+            >
+              BootCamps
+            </Button>
           </div>
 
           {/* Filtered Certifications Display */}
@@ -1105,9 +1134,6 @@ const Index = () => {
     </div>
   </div>
 </section>
-
-
-
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-slate-800/50">

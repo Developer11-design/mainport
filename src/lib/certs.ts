@@ -58,5 +58,17 @@ export const certifications = [
   {
     title : "Data Science (SkillUp)",
     image : "/certs/Data Science SkillUp.png",
+  },
+  {
+    title : "Python and AI (DevTown)",
+    image : "/certs/Python and AI.png",
+  },
+  {
+    title : "GenAI with LLMs (PreGrad)",
+    image : "/certs/GenAI.png",
+  },
+  {
+    title : "Python Project (PreGrad)",
+    image : "/certs/PyPro.png",
   }
 ];
